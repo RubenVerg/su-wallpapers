@@ -1,0 +1,32 @@
+{
+  "name": "su-wallpapers",
+  "version": "1.0.0",
+  "description": "This repo creates a nice client for browsing Steven Universe wallpapers (uploaded on Reddit by u/Ajit-Pajouhesh) and (soon™) setting them as desktop backgrounds.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rmdir dist /s /q || exit 0",
+    "copy": "robocopy /mt /e /is /it /im .\\src .\\dist *.js *.json *.html & robocopy /mt /e /im .\\src\\node_modules .\\dist\\node_modules & exit 0",
+    "tsc": "tsc",
+    "build": "npm run copy & npm run tsc",
+    "start": "electron dist",
+    "dev": "npm run clean && npm run build && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://repos/RubenVerg/su-wallpapers.git"
+  },
+  "author": "RubenVerg <me@rubenverg.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron/typescript-definitions": "^8.8.0",
+    "@types/bent": "^7.3.2",
+    "@types/jsdom": "^16.2.9",
+    "@types/node": "^14.14.37",
+    "source-map-support": "^0.5.19"
+  },
+  "dependencies": {
+    "electron": "^12.0.2",
+    "reddit-wrapper-v2": "^1.1.6"
+  }
+}
