@@ -3,7 +3,7 @@
 	"tasks": [
 		{
 			"type": "npm",
-			"script": "build",
+			"script": "tsc",
 			"problemMatcher": [
 				"$tsc"
 			],
@@ -11,18 +11,7 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"label": "npm: build",
-			"detail": "npm run copy & npm run tsc",
-		},
-		{
-			"type": "npm",
-			"script": "copy",
-			"group": {
-				"kind": "build",
-				"isDefault": true
-			},
-			"label": "npm: copy",
-			"detail": "Only copies, for when tsc is in watch mode somewhere"
+			"label": "npm: tsc"
 		},
 		{
 			"type": "shell",

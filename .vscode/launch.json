@@ -11,7 +11,7 @@
 				"runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
 			},
 			"args": [
-				"dist"
+				"."
 			],
 			"outputCapture": "std",
 			"sourceMaps": true,

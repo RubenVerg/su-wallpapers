@@ -5,12 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rmdir dist /s /q || exit 0",
-    "copy": "robocopy /mt /e /is /it /im .\\src .\\dist *.js *.json *.html & robocopy /mt /e /im .\\src\\node_modules .\\dist\\node_modules & exit 0",
-    "tsc": "tsc",
-    "build": "npm run copy & npm run tsc",
-    "start": "electron dist",
-    "dev": "npm run clean && npm run build && npm start"
+    "tsc": "tsc"
   },
   "repository": {
     "type": "git",
@@ -21,6 +16,7 @@
   "devDependencies": {
     "@electron/typescript-definitions": "^8.8.0",
     "@types/bent": "^7.3.2",
+    "@types/bootstrap": "^5.0.12",
     "@types/fs-extra": "^9.0.11",
     "@types/jsdom": "^16.2.9",
     "@types/node": "^14.14.37",
@@ -30,6 +26,7 @@
   },
   "dependencies": {
     "bent": "^7.3.12",
+    "bootstrap": "^5.0.0-beta3",
     "electron": "^12.0.2",
     "fs-extra": "^7.0.1",
     "reddit-wrapper-v2": "^1.1.6",
