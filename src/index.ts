@@ -2,7 +2,15 @@
 import { app, ipcMain, BrowserWindow } from 'electron';
 import path from 'path';
 
-import reddit1, { tagged as taggedReddit1 } from './data/reddit1';
+import { all as allImages, tagged as taggedImages, tags as imagesByTags } from './data';
+import * as tagData from './data/tags';
+import { TagID } from './data/tags';
+
+import bent from 'bent';
+const request = bent('buffer');
+import fs from 'fs-extra';
+
+import wallpaper from 'wallpaper';
 
 import { install } from 'source-map-support';
 install();
@@ -29,13 +37,36 @@ function createWindow() {
 	mainWindow.webContents.openDevTools()
 }
 
-const requestHandlers: Record<string, (...args: any[]) => any | Promise<any>> = {
-    images: async () => {
-        return await reddit1();
-    },
-    taggedImages: async () => {
-        return await taggedReddit1();
-    }
+type Handler<Args extends any[], Return> = (...args: Args) => Return | PromiseLike<Return>
+
+const requestHandlers: Record<string, Handler<unknown[], unknown>> = {
+	images: async () => {
+		return await allImages();
+	},
+	taggedImages: async () => {
+		return await taggedImages();
+	},
+	imagesByTags: async (...tags: TagID[]) => {
+		return await imagesByTags(...tags);
+	},
+	tags: () => {
+		return tagData.tagDisplays;
+	},
+}
+
+const actionHandlers: Record<string, Handler<unknown[], unknown>> = {
+	bg: async (image: string) => {
+		try {
+			const name = image.replace(/[\/\\:]/g, '');
+			console.log(name);
+			const i = await request(image);
+			await fs.writeFile(path.join(app.getPath('userData'), name), i);
+			await wallpaper.set(path.join(app.getPath('userData'), name));
+			return null as Error;
+		} catch (ex) {
+			return ex as Error;
+		}
+	},
 }
 
 // This method will be called when Electron has finished
@@ -52,16 +83,26 @@ app.whenReady().then(async () => {
 
 	const mainWindow = BrowserWindow.getAllWindows()[0];
 
-    for (let req in requestHandlers) {
-        ipcMain.on(`request!${req}`, async (evt, id: number, ...args: any[]) => {
-            evt.reply(`reply!${req}`, id, await requestHandlers[req](...args));
-        });
-    }
+	for (let req in requestHandlers) {
+		ipcMain.on(`request!${req}`, async (evt, id: number, ...args: any[]) => {
+			evt.reply(`reply!${req}`, id, await requestHandlers[req](...args));
+		});
+	}
 
-    for (let level of ['info', 'warn', 'error', 'debug', 'log']) {
-        // @ts-ignore
-        console[level] = (...args) => mainWindow.webContents.send(`log!${level}`, ...args);
-    }
+	for (let act in actionHandlers) {
+		ipcMain.on(`do!${act}`, async (evt, id: Number, ...args: any[]) => {
+			evt.reply(`done!${act}`, id, await actionHandlers[act](...args));
+		})
+	}
+
+	for (let level of ['info', 'warn', 'error', 'debug', 'log']) {
+		const original = console[level].bind(console);
+		// @ts-ignore
+		console[level] = (...args: any[]) => {
+			original(...args);
+			mainWindow.webContents.send(`log!${level}`, ...args);
+		};
+	}
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common

@@ -8,6 +8,10 @@
 	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
 	<meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
 	-->
+
+	<script>
+		const fle = new Event('fully-loaded-believe-me');
+	</script>
 	<title>Hello World!</title>
 
 	<link rel='stylesheet' href='./node_modules/bootstrap/dist/css/bootstrap.min.css' />
@@ -15,54 +19,32 @@
 
 <body>
 
-    <nav>
-        <div class='nav nav-tabs' id='navigation' role=tablist>
-            <button
-                class='nav-link active'
-                id='nav-home'
-                data-bs-toggle=tab
-                data-bs-target='#home'
-                type=button
-                role=tab
-                aria-controls='home'
-                aria-selected=true
-            >
-                All images
-            </button>
-            <button
-                class='nav-link'
-                id='nav-tags' 
-                data-bs-toggle=tab
-                data-bs-target='#tags'
-                type=button
-                role=tab
-                aria-controls='tags'
-                aria-selected=false
-            >
-                By tag(s)
-            </button>
-        </div>
-    </nav>
+	<nav>
+		<div class='nav nav-tabs' id='navigation' role=tablist>
+			<button is='bs-tab-selector' class='nav-link active' id='nav-home' data-bs-toggle=tab data-bs-target='#home' type=button role=tab
+				aria-controls='home' aria-selected=true>
+				All images
+			</button>
+			<button is='bs-tab-selector' class='nav-link' id='nav-tags' data-bs-toggle=tab data-bs-target='#tags' type=button role=tab
+				aria-controls='tags' aria-selected=false>
+				By tag(s)
+			</button>
+		</div>
+	</nav>
 
-    <div class='tab-content' id='content'>
-        <div
-            class='tab-pane fade show active'
-            id='home'
-            role=tabpanel
-            aria-labelledby='nav-home'
-        ></div>
-        <div
-            class='tab-pane fade'
-            id='tags'
-            role=tabpanel
-            aria-labelledby='nav-tags'
-        ></div>
-    </div>
+	<div class='tab-content' id='content'>
+		<div class='tab-pane fade show active' id='home' role=tabpanel aria-labelledby='nav-home'></div>
+		<div class='tab-pane fade' id='tags' role=tabpanel aria-labelledby='nav-tags'></div>
+	</div>
 </body>
 
 <script src='./node_modules/bootstrap/dist/js/bootstrap.bundle.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4/dist/masonry.pkgd.js"></script>
 
 <script src="./renderer.js"></script>
+
+<script>
+	window.dispatchEvent(fle);
+</script>
 
 </html>

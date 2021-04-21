@@ -1,0 +1,38 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"label": "npm: build",
+			"detail": "npm run copy & npm run tsc",
+		},
+		{
+			"type": "npm",
+			"script": "copy",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"label": "npm: copy",
+			"detail": "Only copies, for when tsc is in watch mode somewhere"
+		},
+		{
+			"type": "shell",
+			"command": "exit 0",
+			"label": "nothing",
+			"detail": "Do nothing.",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			}
+		}
+	]
+}

@@ -1,5 +1,5 @@
 {
-  "name": "@su-wallpapers/assets",
+  "name": "su-wallpapers",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,5 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^5.0.0-beta3"
+  },
+  "devDependencies": {
+    "@types/bootstrap": "^5.0.12"
   }
 }
