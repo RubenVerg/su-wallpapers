@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "start": "tsc && electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "repository": {
     "type": "git",
@@ -14,6 +17,11 @@
   "author": "RubenVerg <me@rubenverg.com>",
   "license": "MIT",
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@electron/typescript-definitions": "^8.8.0",
     "@types/bent": "^7.3.2",
     "@types/bootstrap": "^5.0.12",
@@ -22,15 +30,43 @@
     "@types/node": "^14.14.37",
     "@types/request-promise-native": "^1.0.17",
     "devtron": "^1.4.0",
+    "electron": "^12.0.5",
     "source-map-support": "^0.5.19"
   },
   "dependencies": {
     "bent": "^7.3.12",
     "bootstrap": "^5.0.0-beta3",
-    "electron": "^12.0.2",
+    "electron-squirrel-startup": "^1.0.0",
     "fs-extra": "^7.0.1",
     "reddit-wrapper-v2": "^1.1.6",
     "request-promise-native": "^1.0.9",
     "wallpaper": "^4.4.2"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "su_wallpapers"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
