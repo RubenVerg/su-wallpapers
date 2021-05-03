@@ -11,6 +11,10 @@
 		"esModuleInterop": true,
 		"sourceMap": true,
 		"jsx": "react",
-		"jsxFactory": "window.jsx.createElement"
-	}
+		"jsxFactory": "window.jsx.createElement",
+		"incremental": true
+	},
+	"exclude": [
+		"out/**/*"
+	]
 }

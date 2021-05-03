@@ -42,6 +42,7 @@ export default async function reddit2(): Promise<Image[]> {
 
 		let k: RegExpExecArray | null;
 		const out = {
+			uid: `r_stevenuniverse_every_day_${day}`,
 			imageUrl: null,
 			sourceUrl: url,
 			category: 'Beyond the Foreground',
@@ -79,6 +80,7 @@ export default async function reddit2(): Promise<Image[]> {
 
 		let k: RegExpExecArray | null;
 		const out = {
+			uid: `r_stevenuniverse_every_day_${day}`,
 			imageUrl: null,
 			sourceUrl: url,
 			category: 'The Beginning and The End',

@@ -12,29 +12,78 @@
 	<script>
 		const fle = new Event('fully-loaded-believe-me');
 	</script>
-	<title>Hello World!</title>
+	<title>Steven Universe Wallpapers Browser</title>
 
 	<link rel='stylesheet' href='./node_modules/bootstrap/dist/css/bootstrap.min.css' />
+
+	<script src="node_modules/xel/xel.js" type="module"></script>
+	<meta name="xel-theme" content="node_modules/xel/themes/fluent.css">
+	<meta name="xel-accent-color" content="#94e044">
+	<meta name="xel-size" content="medium">
+	<meta name="xel-iconset" content="https://raw.githubusercontent.com/twbs/icons/main/bootstrap-icons.svg">
+	<link href="node_modules/xel-fonts/fonts.css" rel="stylesheet" />
+
+	<style>
+		.dialog-image {
+			height: 100vh;
+		}
+
+		.dialog-image > main {
+			height: 100%;
+			text-align: center;
+		}
+
+		.dialog-image > main > img {
+			height: 75%;
+		}
+
+		#favorites > x-card {
+			display: inline-block;
+		}
+	</style>
 </head>
 
 <body>
+	<bs-alert variant='info' id='loading' class="my-5 mx-4">
+		<h5>
+			Loading...
+		</h5>
+	</bs-alert>
 
 	<nav>
-		<div class='nav nav-tabs' id='navigation' role=tablist>
-			<button is='bs-tab-selector' class='nav-link active' id='nav-home' data-bs-toggle=tab data-bs-target='#home' type=button role=tab
-				aria-controls='home' aria-selected=true>
-				All images
-			</button>
-			<button is='bs-tab-selector' class='nav-link' id='nav-tags' data-bs-toggle=tab data-bs-target='#tags' type=button role=tab
-				aria-controls='tags' aria-selected=false>
-				By tag(s)
-			</button>
-		</div>
+		<x-tabs class='nav nav-tabs' id='navigation' role=tablist>
+			<x-tab selected id='nav-home' role=tab aria-controls='home' aria-selected=true value='#home'>
+				<x-icon name='images'></x-icon>
+				<x-label>All images</x-label>
+			</x-tab>
+			<x-tab id='nav-tags' role=tab aria-controls='tags' aria-selected=false value='#tags'>
+				<x-icon name='tag'></x-icon>
+				<x-label>By tag(s)</x-label>
+			</x-tab>
+			<x-tab id='nav-favorites' role=tab aria-controls='favorites' aria-selected=false value='#favorites'>
+				<x-icon name='star'></x-icon>
+				<x-label>Favorites</x-label>
+			</x-tab>
+			<x-tab id='nav-settings' role=tab aria-controls='settings' aria-selected=false value='#settings'>
+				<x-icon name='gear'></x-icon>
+				<x-label>Settings</x-label>
+			</x-tab>
+		</x-tabs>
 	</nav>
 
-	<div class='tab-content' id='content'>
-		<div class='tab-pane fade show active' id='home' role=tabpanel aria-labelledby='nav-home'></div>
-		<div class='tab-pane fade' id='tags' role=tabpanel aria-labelledby='nav-tags'></div>
+	<div id='content'>
+		<div id='home' role=tabpanel aria-labelledby='nav-home' style='display: unset;'>
+
+		</div>
+		<div id='tags' role=tabpanel aria-labelledby='nav-tags' style='display: none;'>
+
+		</div>
+		<div id='favorites' role=tabpanel aria-labelledby='nav-settings' style='display: none;'>
+
+		</div>
+		<div id='settings' role=tabpanel aria-labelledby='nav-settings' style='display: none;'>
+
+		</div>
 	</div>
 </body>
 

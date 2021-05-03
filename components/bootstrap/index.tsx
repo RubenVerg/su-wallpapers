@@ -32,7 +32,7 @@ export class BSTabSelector extends HTMLButtonElement {
 	static readonly ELEMENT = 'button';
 }
 
-// <bs-alert style='secondary' dismiss> abcd <button is='bs-alert-dismiss' /> </bs-alert>
+// <bs-alert variant='secondary' dismiss> abcd <button is='bs-alert-dismiss' /> </bs-alert>
 export class BSAlert extends HTMLElement {
 	connectedCallback() {
 		this.setAttribute('role', 'alert');
@@ -196,7 +196,7 @@ export class BSModal extends HTMLElement {
 			this.dataset.bsBackdrop = 'static';
 			this.dataset.bsKeyboard = 'false';
 		}
-		setTimeout(() => {
+		// setTimeout(() => {
 			if (this.#wrapped) return;
 			this.#wrapped = true;
 			const ch = Array.from(this.childNodes);
@@ -215,6 +215,6 @@ export class BSModal extends HTMLElement {
 					{ch}
 				</div>
 			</div>);
-		}, 0);
+		// }, 0);
 	}
 }
